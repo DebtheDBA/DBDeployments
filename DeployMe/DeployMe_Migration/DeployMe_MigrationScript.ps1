@@ -12,6 +12,7 @@ Set-Location $location
 # Functions
 # Views
 # StoredProcs
+# Data
 
 # Confirm that the deploy schema and migration log table are created
 $deployfile = "$location\Schemas\Deploy.Schema.sql"
