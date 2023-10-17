@@ -1,5 +1,7 @@
 $location = "C:\GitRepo\DBDeployments\DeployMe\DeployMe_Migration"
-$instance = 'debthedba\sql2019'
+$instance = '192.168.182.128'
+$User='deb'
+$Password='Presenter'
 $database = 'DeployMe_Migration'
 
 Set-Location $location
@@ -18,8 +20,8 @@ Set-Location $location
 $deployfile = "$location\Schemas\Deploy.Schema.sql"
 $migrationlogfile = "$location\tables\deploy.MigrationLog.sql"
 
-Invoke-Sqlcmd -ServerInstance $instance -Database $database -InputFile $deployfile -AbortOnError  
-Invoke-Sqlcmd -ServerInstance $instance -Database $database -InputFile $migrationlogfile -AbortOnError 
+Invoke-Sqlcmd -ServerInstance $instance -Database $database -Username $user -Password $password -TrustServerCertificate -InputFile $deployfile -AbortOnError  
+Invoke-Sqlcmd -ServerInstance $instance -Database $database -Username $user -Password $password -TrustServerCertificate -InputFile $migrationlogfile -AbortOnError 
 
 $a = Get-ChildItem $location
 
@@ -33,9 +35,9 @@ If ($a.Name -eq "Schemas") {
         $insertLogQuery = "INSERT INTO deploy.MigrationLog (FileRun, LogAction) VALUES ('$_.Name', 'START')"
         $updateLogQuery = "INSERT INTO deploy.MigrationLog (FileRun, LogAction) VALUES ('$_.Name', 'END')"
 
-        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Query $insertLogQuery -AbortOnError
-        Invoke-Sqlcmd -ServerInstance $instance -Database $database -InputFile $file -AbortOnError
-        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Query $updateLogQuery -AbortOnError
+        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Username $user -Password $password -TrustServerCertificate -Query $insertLogQuery -AbortOnError
+        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Username $user -Password $password -TrustServerCertificate -InputFile $file -AbortOnError
+        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Username $user -Password $password -TrustServerCertificate -Query $updateLogQuery -AbortOnError
     }
 
     write-host "End: Running schema scripts from $schemalocation"
@@ -51,9 +53,9 @@ If ($a.Name -eq "Tables") {
         $insertLogQuery = "INSERT INTO deploy.MigrationLog (FileRun, LogAction) VALUES ('$_.Name', 'START')"
         $updateLogQuery = "INSERT INTO deploy.MigrationLog (FileRun, LogAction) VALUES ('$_.Name', 'END')"
 
-        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Query $insertLogQuery -AbortOnError
-        Invoke-Sqlcmd -ServerInstance $instance -Database $database -InputFile $file -AbortOnError
-        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Query $updateLogQuery -AbortOnError
+        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Username $user -Password $password -TrustServerCertificate -Query $insertLogQuery -AbortOnError
+        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Username $user -Password $password -TrustServerCertificate -InputFile $file -AbortOnError
+        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Username $user -Password $password -TrustServerCertificate -Query $updateLogQuery -AbortOnError
     }
 
     write-host "End: Running table scripts from $tablelocation"
@@ -70,9 +72,9 @@ If ($a.Name -eq "ForeignKeys") {
         $insertLogQuery = "INSERT INTO deploy.MigrationLog (FileRun, LogAction) VALUES ('$_.Name', 'START')"
         $updateLogQuery = "INSERT INTO deploy.MigrationLog (FileRun, LogAction) VALUES ('$_.Name', 'END')"
 
-        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Query $insertLogQuery -AbortOnError
-        Invoke-Sqlcmd -ServerInstance $instance -Database $database -InputFile $file -AbortOnError
-        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Query $updateLogQuery -AbortOnError
+        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Username $user -Password $password -TrustServerCertificate -Query $insertLogQuery -AbortOnError
+        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Username $user -Password $password -TrustServerCertificate -InputFile $file -AbortOnError
+        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Username $user -Password $password -TrustServerCertificate -Query $updateLogQuery -AbortOnError
     }
 
     write-host "End: Running foreign key scripts from $tablelocation"
@@ -89,9 +91,9 @@ If ($a.Name -eq "Functions") {
         $insertLogQuery = "INSERT INTO deploy.MigrationLog (FileRun, LogAction) VALUES ('$_.Name', 'START')"
         $updateLogQuery = "INSERT INTO deploy.MigrationLog (FileRun, LogAction) VALUES ('$_.Name', 'END')"
 
-        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Query $insertLogQuery -AbortOnError
-        Invoke-Sqlcmd -ServerInstance $instance -Database $database -InputFile $file -AbortOnError
-        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Query $updateLogQuery -AbortOnError
+        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Username $user -Password $password -TrustServerCertificate -Query $insertLogQuery -AbortOnError
+        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Username $user -Password $password -TrustServerCertificate -InputFile $file -AbortOnError
+        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Username $user -Password $password -TrustServerCertificate -Query $updateLogQuery -AbortOnError
     }
 
     write-host "End: Running function scripts from $tablelocation"
@@ -106,9 +108,9 @@ If ($a.Name -eq "Views") {
         $insertLogQuery = "INSERT INTO deploy.MigrationLog (FileRun, LogAction) VALUES ('$_.Name', 'START')"
         $updateLogQuery = "INSERT INTO deploy.MigrationLog (FileRun, LogAction) VALUES ('$_.Name', 'END')"
 
-        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Query $insertLogQuery -AbortOnError
-        Invoke-Sqlcmd -ServerInstance $instance -Database $database -InputFile $file -AbortOnError
-        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Query $updateLogQuery -AbortOnError
+        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Username $user -Password $password -TrustServerCertificate -Query $insertLogQuery -AbortOnError
+        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Username $user -Password $password -TrustServerCertificate -InputFile $file -AbortOnError
+        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Username $user -Password $password -TrustServerCertificate -Query $updateLogQuery -AbortOnError
     }
 
     write-host "End: Running view scripts from $tablelocation"
@@ -124,9 +126,9 @@ If ($a.Name -eq "StoredProcs") {
         $insertLogQuery = "INSERT INTO deploy.MigrationLog (FileRun, LogAction) VALUES ('$_.Name', 'START')"
         $updateLogQuery = "INSERT INTO deploy.MigrationLog (FileRun, LogAction) VALUES ('$_.Name', 'END')"
 
-        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Query $insertLogQuery -AbortOnError
-        Invoke-Sqlcmd -ServerInstance $instance -Database $database -InputFile $file -AbortOnError
-        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Query $updateLogQuery -AbortOnError
+        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Username $user -Password $password -TrustServerCertificate -Query $insertLogQuery -AbortOnError
+        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Username $user -Password $password -TrustServerCertificate -InputFile $file -AbortOnError
+        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Username $user -Password $password -TrustServerCertificate -Query $updateLogQuery -AbortOnError
     }
 
     write-host "End: Running stored proc scripts from $tablelocation"
@@ -141,9 +143,9 @@ If ($a.Name -eq "Data") {
         $insertLogQuery = "INSERT INTO deploy.MigrationLog (FileRun, LogAction) VALUES ('$_.Name', 'START')"
         $updateLogQuery = "INSERT INTO deploy.MigrationLog (FileRun, LogAction) VALUES ('$_.Name', 'END')"
 
-        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Query $insertLogQuery -AbortOnError
-        Invoke-Sqlcmd -ServerInstance $instance -Database $database -InputFile $file -AbortOnError
-        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Query $updateLogQuery -AbortOnError
+        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Username $user -Password $password -TrustServerCertificate -Query $insertLogQuery -AbortOnError
+        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Username $user -Password $password -TrustServerCertificate -InputFile $file -AbortOnError
+        Invoke-Sqlcmd -ServerInstance $instance -Database $database -Username $user -Password $password -TrustServerCertificate -Query $updateLogQuery -AbortOnError
     }
 
     write-host "End: Running data scripts from $tablelocation"
