@@ -10,4 +10,6 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 
-:r ".\dbo\Data\Lookup10.Data.sql"
+/* confirm the path before testing! */
+
+:r ".\Data\Lookup10.Data.sql"
